@@ -1,0 +1,22 @@
+[Unit]
+Description=Depths's distributed currency daemon
+After=network.target
+
+[Service]
+User=Depthscore
+Group=Depthscore
+
+Type=forking
+PIDFile=/var/lib/Depthsd/Depthsd.pid
+ExecStart=/usr/bin/Depthsd -daemon -pid=/var/lib/Depthsd/Depthsd.pid \
+-conf=/etc/Depthscore/Depths.conf -datadir=/var/lib/Depthsd -disablewallet
+
+Restart=always
+PrivateTmp=true
+TimeoutStopSec=60s
+TimeoutStartSec=2s
+StartLimitInterval=120s
+StartLimitBurst=5
+
+[Install]
+WantedBy=multi-user.target

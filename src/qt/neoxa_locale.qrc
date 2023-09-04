@@ -1,0 +1,25 @@
+<!DOCTYPE RCC><RCC version="1.0">
+    <qresource prefix="/translations">
+        <file alias="ar">locale/Depths_ar.qm</file>
+        <file alias="bg">locale/Depths_bg.qm</file>
+        <file alias="de">locale/Depths_de.qm</file>
+        <file alias="en">locale/Depths_en.qm</file>
+        <file alias="es">locale/Depths_es.qm</file>
+        <file alias="fi">locale/Depths_fi.qm</file>
+        <file alias="fr">locale/Depths_fr.qm</file>
+        <file alias="it">locale/Depths_it.qm</file>
+        <file alias="ja">locale/Depths_ja.qm</file>
+        <file alias="ko">locale/Depths_ko.qm</file>
+        <file alias="nl">locale/Depths_nl.qm</file>
+        <file alias="pl">locale/Depths_pl.qm</file>
+        <file alias="pt">locale/Depths_pt.qm</file>
+        <file alias="ro">locale/Depths_ro.qm</file>
+        <file alias="ru">locale/Depths_ru.qm</file>
+        <file alias="sk">locale/Depths_sk.qm</file>
+        <file alias="th">locale/Depths_th.qm</file>
+        <file alias="tr">locale/Depths_tr.qm</file>
+        <file alias="vi">locale/Depths_vi.qm</file>
+        <file alias="zh_CN">locale/Depths_zh_CN.qm</file>
+        <file alias="zh_TW">locale/Depths_zh_TW.qm</file>
+    </qresource>
+</RCC>

@@ -1,0 +1,13 @@
+[Desktop Entry]
+Encoding=UTF-8
+Name=Depths Core
+Comment=Depths P2P Cryptocurrency
+Comment[de]=Verbinde mit dem Depths peer-to-peer Netzwerk
+Comment[fr]=Depths, monnaie virtuelle cryptographique pair à pair
+Comment[tr]=Depths, eşten eşe kriptografik sanal para birimi
+Exec=Depths-qt %u
+Terminal=false
+Type=Application
+Icon=Depths128
+MimeType=x-scheme-handler/Depths;
+Categories=Office;Finance;
