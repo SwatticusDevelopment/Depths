@@ -253,7 +253,7 @@ void CSmartnodeSync::ProcessTick(CConnman& connman)
                     static int64_t nTimeNoObjectsLeft = 0;
                     // check for data
                     if(nObjsLeftToAsk == 0) {
-                        static int nLastTick = 0;
+                        static int nLastTick = 1;
                         static int nLastVotes = 0;
                         if(nTimeNoObjectsLeft == 0) {
                             // asked all objects for votes for the first time
