@@ -1,5 +1,5 @@
 // Copyright (c) 2014-2019 The Dash Core developers
-// Copyright (c) 2020 The Depths developers
+// Copyright (c) 2023 Swatticus Development
 
 #include "governance/governance-validators.h"
 #include "utilstrencodings.h"

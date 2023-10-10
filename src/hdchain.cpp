@@ -1,5 +1,5 @@
 // Copyright (c) 2014-2020 The Dash Core developers
-// Copyright (c) 2020 The Depths developers
+// Copyright (c) 2023 Swatticus Development
 // Distributed under the MIT software license, see the accompanying
 
 #include "base58.h"
