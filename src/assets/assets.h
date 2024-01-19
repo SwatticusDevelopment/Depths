@@ -18,12 +18,12 @@
 #include <list>
 
 
-#define NEOX_N 114
-#define NEOX_E 118
-#define NEOX_X 110
-#define NEOX_Q 113
-#define NEOX_T 116
-#define NEOX_O 111
+#define Depths_N 114
+#define Depths_E 118
+#define Depths_X 110
+#define Depths_Q 113
+#define Depths_T 116
+#define Depths_O 111
 
 
 #define DEFAULT_UNITS 0
@@ -469,10 +469,10 @@ bool CheckIssueBurnTx(const CTxOut& txOut, const AssetType& type);
 bool CheckReissueBurnTx(const CTxOut& txOut);
 
 //! issue asset scripts to make sure script meets the standards
-bool CheckIssueDataTx(const CTxOut& txOut); // OP_Depths_ASSET NEOXQ (That is a Q as in Que not an O)
-bool CheckOwnerDataTx(const CTxOut& txOut);// OP_Depths_ASSET NEOXO
-bool CheckReissueDataTx(const CTxOut& txOut);// OP_Depths_ASSET NEOXR
-bool CheckTransferOwnerTx(const CTxOut& txOut);// OP_Depths_ASSET NEOXT
+bool CheckIssueDataTx(const CTxOut& txOut); // OP_Depths_ASSET DepthsQ (That is a Q as in Que not an O)
+bool CheckOwnerDataTx(const CTxOut& txOut);// OP_Depths_ASSET DepthsO
+bool CheckReissueDataTx(const CTxOut& txOut);// OP_Depths_ASSET DepthsR
+bool CheckTransferOwnerTx(const CTxOut& txOut);// OP_Depths_ASSET DepthsT
 
 //! Check the Encoded hash and make sure it is either an IPFS hash or a OIP hash
 bool CheckEncoded(const std::string& hash, std::string& strError);

@@ -368,7 +368,7 @@
                     <enum>Qt::ActionsContextMenu</enum>
                    </property>
                    <property name="text">
-                    <string notr="true">0.00 NEOX</string>
+                    <string notr="true">0.00 Depths</string>
                    </property>
                    <property name="textInteractionFlags">
                     <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByKeyboard|Qt::TextSelectableByMouse</set>
@@ -448,7 +448,7 @@
                     <enum>Qt::ActionsContextMenu</enum>
                    </property>
                    <property name="text">
-                    <string notr="true">0.00 NEOX</string>
+                    <string notr="true">0.00 Depths</string>
                    </property>
                    <property name="textInteractionFlags">
                     <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByKeyboard|Qt::TextSelectableByMouse</set>
@@ -499,7 +499,7 @@
                     <enum>Qt::ActionsContextMenu</enum>
                    </property>
                    <property name="text">
-                    <string notr="true">0.00 NEOX</string>
+                    <string notr="true">0.00 Depths</string>
                    </property>
                    <property name="textInteractionFlags">
                     <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByKeyboard|Qt::TextSelectableByMouse</set>
@@ -528,7 +528,7 @@
                     <enum>Qt::ActionsContextMenu</enum>
                    </property>
                    <property name="text">
-                    <string notr="true">0.00 NEOX</string>
+                    <string notr="true">0.00 Depths</string>
                    </property>
                    <property name="textInteractionFlags">
                     <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByKeyboard|Qt::TextSelectableByMouse</set>
@@ -779,7 +779,7 @@
                <string/>
               </property>
               <property name="placeholderText">
-               <string>The NEOX address that will hold this asset (You must own this address). Leave blank to create a new address.</string>
+               <string>The Depths address that will hold this asset (You must own this address). Leave blank to create a new address.</string>
               </property>
              </widget>
             </item>
@@ -1793,7 +1793,7 @@
          <item>
           <widget class="QLabel" name="labelBalance">
            <property name="text">
-            <string>123.456 NEOX</string>
+            <string>123.456 Depths</string>
            </property>
           </widget>
          </item>

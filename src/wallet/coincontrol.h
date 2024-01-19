@@ -46,10 +46,10 @@ public:
     //! Controls which types of coins are allowed to be used (default: ALL_COINS)
     CoinType nCoinType;
 
-    /** NEOX START */
+    /** Depths START */
     //! Name of the asset that is selected, used when sending assets with coincontrol
     std::string strAssetSelected;
-    /** NEOX END */
+    /** Depths END */
 
     CCoinControl()
     {

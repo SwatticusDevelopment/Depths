@@ -192,7 +192,7 @@ isminetype IsMine(const CKeyStore &keystore, const CScript& scriptPubKey, bool& 
                 return ISMINE_SPENDABLE;
             break;
         }
-            /** NEOX END*/
+            /** Depths END*/
     }
 
     if (keystore.HaveWatchOnly(scriptPubKey)) {

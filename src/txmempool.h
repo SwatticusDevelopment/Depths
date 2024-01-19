@@ -477,7 +477,7 @@ public:
     mutable CCriticalSection cs;
     indexed_transaction_set mapTx;
 
-    /* NEOX ASSETS START */
+    /* Depths ASSETS START */
     std::map<std::string, uint256> mapAssetToHash;
     std::map<uint256, std::string> mapHashToAsset;
 
@@ -512,7 +512,7 @@ public:
 
     std::map<std::string, std::set<uint256>> mapGlobalUnFreezingAssetTransactions;
     std::map<uint256, std::set<std::string>> mapHashGlobalUnFreezingAssetTransactions;
-    /* NEOX ASSETS END */
+    /* Depths ASSETS END */
 
     typedef indexed_transaction_set::nth_index<0>::type::iterator txiter;
     std::vector<std::pair<uint256, txiter> > vTxHashes; //!< All tx hashes/entries in mapTx, in random order

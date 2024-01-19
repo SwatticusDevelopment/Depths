@@ -159,9 +159,9 @@ bool IsStandardTx(const CTransaction& tx, std::string& reason, const bool witnes
         return false;
     }
     
-    // only one hundred OP_NEOX_ASSET txout is permitted
+    // only one hundred OP_Depths_ASSET txout is permitted
     if (nAssetDataOut > 100) {
-        reason = "tomany-op-neox-asset";
+        reason = "tomany-op-Depths-asset";
         return false;
     }
 

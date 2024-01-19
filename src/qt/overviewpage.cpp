@@ -45,7 +45,7 @@ class TxViewDelegate : public QAbstractItemDelegate
     Q_OBJECT
 public:
     TxViewDelegate(const PlatformStyle *_platformStyle, QObject *parent=nullptr):
-        QAbstractItemDelegate(), unit(BitcoinUnits::NEOX),
+        QAbstractItemDelegate(), unit(BitcoinUnits::Depths),
         platformStyle(_platformStyle)
     {
 
@@ -132,7 +132,7 @@ class AssetViewDelegate : public QAbstractItemDelegate
 Q_OBJECT
 public:
     explicit AssetViewDelegate(const PlatformStyle *_platformStyle, QObject *parent=nullptr):
-            QAbstractItemDelegate(parent), unit(BitcoinUnits::NEOX),
+            QAbstractItemDelegate(parent), unit(BitcoinUnits::Depths),
             platformStyle(_platformStyle)
     {
 
@@ -588,7 +588,7 @@ void OverviewPage::setWalletModel(WalletModel *model)
     this->walletModel = model;
     if(model && model->getOptionsModel())
     {
-        // update the display unit, to not use the default ("NEOX")
+        // update the display unit, to not use the default ("Depths")
         updateDisplayUnit();
         // Keep up to date with wallet
         setBalance(model->getBalance(), model->getUnconfirmedBalance(), model->getImmatureBalance(), model->getAnonymizedBalance(),

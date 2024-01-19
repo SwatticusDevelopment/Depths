@@ -93,7 +93,7 @@ BOOST_AUTO_TEST_CASE(script_standard_Solver_success)
 
     // TX_RESTRICTED_ASSET_DATA
         s.clear();
-        s << OP_NEOX_ASSET <<
+        s << OP_Depths_ASSET <<
           std::vector<unsigned char>({0}) <<
           std::vector<unsigned char>({75}) <<
           std::vector<unsigned char>({255});

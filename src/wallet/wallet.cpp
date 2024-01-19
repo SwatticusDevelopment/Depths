@@ -2004,7 +2004,7 @@ void CWalletTx::GetAmounts(std::list<COutputEntry>& listReceived,
                 listReceived.push_back(output);
         }
 
-        /** NEOX START */
+        /** Depths START */
         if (AreAssetsDeployed()) {
             if (txout.scriptPubKey.IsAssetScript()) {
                 CAssetOutputEntry assetoutput;
@@ -2019,7 +2019,7 @@ void CWalletTx::GetAmounts(std::list<COutputEntry>& listReceived,
                     assetsReceived.emplace_back(assetoutput);
             }
         }
-        /** NEOX END */
+        /** Depths END */
     }
 
 }
@@ -2798,7 +2798,7 @@ void CWallet::AvailableCoinsWithAssets(std::vector<COutput> &vCoins, std::map<st
     AvailableCoinsAll(vCoins, mapAssetCoins, true, AreAssetsDeployed(), fOnlySafe, coinControl, nMinimumAmount, nMaximumAmount, nMinimumSumAmount, nMaximumCount, nMinDepth, nMaxDepth);
 }
 
-void CWallet::AvailableCoinsAll(std::vector<COutput>& vCoins, std::map<std::string, std::vector<COutput> >& mapAssetCoins, bool fGetNEOX, bool fGetAssets, bool fOnlySafe, const CCoinControl *coinControl, const CAmount& nMinimumAmount, const CAmount& nMaximumAmount, const CAmount& nMinimumSumAmount, const uint64_t& nMaximumCount, const int& nMinDepth, const int& nMaxDepth) const 
+void CWallet::AvailableCoinsAll(std::vector<COutput>& vCoins, std::map<std::string, std::vector<COutput> >& mapAssetCoins, bool fGetDepths, bool fGetAssets, bool fOnlySafe, const CCoinControl *coinControl, const CAmount& nMinimumAmount, const CAmount& nMaximumAmount, const CAmount& nMinimumSumAmount, const uint64_t& nMaximumCount, const int& nMinDepth, const int& nMaxDepth) const 
 {
     vCoins.clear();
     CoinType nCoinType = coinControl ? coinControl->nCoinType : CoinType::ALL_COINS;
@@ -2808,7 +2808,7 @@ void CWallet::AvailableCoinsAll(std::vector<COutput>& vCoins, std::map<std::stri
 
         CAmount nTotal = 0;
         
-        bool fNEOXLimitHit = false;
+        bool fDepthsLimitHit = false;
         // A set of the hashes that have already been used
         std::set<uint256> usedMempoolHashes;
 
@@ -2931,10 +2931,10 @@ void CWallet::AvailableCoinsAll(std::vector<COutput>& vCoins, std::map<std::stri
                     }
                 }
 
-                if (fGetNEOX) {
-                    if (fNEOXLimitHit) // We hit our limit
+                if (fGetDepths) {
+                    if (fDepthsLimitHit) // We hit our limit
                         continue;
-                    // We only want NEOX OutPoints. Don't include Asset OutPoints
+                    // We only want Depths OutPoints. Don't include Asset OutPoints
                     if (isAssetScript)
                         continue;
 
@@ -2951,7 +2951,7 @@ void CWallet::AvailableCoinsAll(std::vector<COutput>& vCoins, std::map<std::stri
 
                     // Checks the maximum number of UTXO's.
                     if (nMaximumCount > 0 && vCoins.size() >= nMaximumCount) {
-                        fNEOXLimitHit = true;
+                        fDepthsLimitHit = true;
                     }
                     continue;
                 }
@@ -4150,7 +4150,7 @@ bool CWallet::CreateTransactionAll(const std::vector<CRecipient>& vecSend, CWall
                                    bool fTransferAsset, bool fReissueAsset, const CReissueAsset& reissueAsset,
                                    const AssetType& assetType, bool sign, int nExtraPayloadSize)
 {
-    /** NEOX START */
+    /** Depths START */
     if (!AreAssetsDeployed() && (fTransferAsset || fNewAsset || fReissueAsset))
         return false;
 
@@ -4162,7 +4162,7 @@ bool CWallet::CreateTransactionAll(const std::vector<CRecipient>& vecSend, CWall
 
     if (fReissueAsset && (reissueAsset.IsNull() || !IsValidDestination(destination)))
         return error("%s : Tried reissuing an asset and the reissue data was null or the destination was invalid", __func__);
-    /** NEOX END */
+    /** Depths END */
 
     CAmount nValue = 0;
     std::map<std::string, CAmount> mapAssetValue;
@@ -4170,7 +4170,7 @@ bool CWallet::CreateTransactionAll(const std::vector<CRecipient>& vecSend, CWall
     unsigned int nSubtractFeeFromAmount = 0;
     for (const auto& recipient : vecSend)
     {
-        /** NEOX START */
+        /** Depths START */
         if (fTransferAsset || fReissueAsset || assetType == AssetType::SUB || assetType == AssetType::UNIQUE || assetType == AssetType::MSGCHANNEL || assetType == AssetType::SUB_QUALIFIER || assetType == AssetType::RESTRICTED) {
             CAssetTransfer assetTransfer;
             std::string address;
@@ -4186,7 +4186,7 @@ bool CWallet::CreateTransactionAll(const std::vector<CRecipient>& vecSend, CWall
                 mapAssetValue[assetTransfer.strName] += assetTransfer.nAmount;
             }
         }
-        /** NEOX END */
+        /** Depths END */
 
         if (nValue < 0 || recipient.nAmount < 0)
         {
@@ -4254,13 +4254,13 @@ bool CWallet::CreateTransactionAll(const std::vector<CRecipient>& vecSend, CWall
         LOCK2(cs_main, cs_wallet);
         {
             std::vector<COutput> vAvailableCoins;
-            /** NEOX START */
+            /** Depths START */
             std::map<std::string, std::vector<COutput> > mapAssetCoins;
             if (fTransferAsset || fReissueAsset || assetType == AssetType::SUB || assetType == AssetType::UNIQUE || assetType == AssetType::MSGCHANNEL || assetType == AssetType::SUB_QUALIFIER || assetType == AssetType::RESTRICTED)
                 AvailableCoinsWithAssets(vAvailableCoins, mapAssetCoins, true, &coin_control);
             else
                 AvailableCoins(vAvailableCoins, true, &coin_control);
-            /** NEOX END */
+            /** Depths END */
 
             // Create change script that will be used if we need change
             // TODO: pass in scriptChange instead of reservekey so
@@ -4292,13 +4292,13 @@ bool CWallet::CreateTransactionAll(const std::vector<CRecipient>& vecSend, CWall
                 scriptChange = GetScriptForDestination(vchPubKey.GetID());
             }
 
-            /** NEOX START */
+            /** Depths START */
             if (!boost::get<CNoDestination>(&coin_control.assetDestChange)) {
                 assetScriptChange = GetScriptForDestination(coin_control.assetDestChange);
             } else {
                 assetScriptChange = scriptChange;
             }
-            /** NEOX END */
+            /** Depths END */
 
             CTxOut change_prototype_txout(0, scriptChange);
             size_t change_prototype_size = GetSerializeSize(change_prototype_txout, SER_DISK, 0);
@@ -4324,14 +4324,14 @@ bool CWallet::CreateTransactionAll(const std::vector<CRecipient>& vecSend, CWall
                 for (const auto& recipient : vecSend)
                 {
                     CTxOut txout(recipient.nAmount, recipient.scriptPubKey);
-                    /** NEOX START */
-                    // Check to see if you need to make an asset data outpoint OP_NEOX_ASSET data
+                    /** Depths START */
+                    // Check to see if you need to make an asset data outpoint OP_Depths_ASSET data
                     if (recipient.scriptPubKey.IsNullAssetTxDataScript()) {
                         assert(txout.nValue == 0);
                         txNew.vout.push_back(txout);
                         continue;
                     }
-                    /** NEOX END */
+                    /** Depths END */
 
                     if (recipient.fSubtractFeeFromAmount)
                     {
@@ -4377,7 +4377,7 @@ bool CWallet::CreateTransactionAll(const std::vector<CRecipient>& vecSend, CWall
                         }
                         return false;
                     }
-                    /** NEOX START */
+                    /** Depths START */
                     if (AreAssetsDeployed()) {
                         setAssets.clear();
                         mapAssetsIn.clear();
@@ -4386,13 +4386,13 @@ bool CWallet::CreateTransactionAll(const std::vector<CRecipient>& vecSend, CWall
                             return false;
                         }
                     }
-                    /** NEOX END */
+                    /** Depths END */
                 }
 
                 const CAmount nChange = nValueIn - nValueToSelect;
                 CTxOut newTxOut;
 
-                /** NEOX START */
+                /** Depths START */
                 if (AreAssetsDeployed()) {
                     // Add the change for the assets
                     std::map<std::string, CAmount> mapAssetChange;
@@ -4479,7 +4479,7 @@ bool CWallet::CreateTransactionAll(const std::vector<CRecipient>& vecSend, CWall
                         }
                     }
                 }
-                /** NEOX END */
+                /** Depths END */
 
                 if (nChange > 0)
                 {
@@ -4520,7 +4520,7 @@ bool CWallet::CreateTransactionAll(const std::vector<CRecipient>& vecSend, CWall
                     nChangePosInOut = -1;
                 }
 
-                 /** NEOX START */
+                 /** Depths START */
                 if (AreAssetsDeployed()) {
                     if (fNewAsset) {
                         for (auto asset : assets) {
@@ -4549,7 +4549,7 @@ bool CWallet::CreateTransactionAll(const std::vector<CRecipient>& vecSend, CWall
                         txNew.vout.push_back(reissueTxOut);
                     }
                 }
-                /** NEOX END */
+                /** Depths END */
 
                 // Fill vin
                 //
@@ -4563,7 +4563,7 @@ bool CWallet::CreateTransactionAll(const std::vector<CRecipient>& vecSend, CWall
                     txNew.vin.push_back(txin);
                 }
 
-                /** NEOX START */
+                /** Depths START */
                 if (AreAssetsDeployed()) {
                     for (const auto &asset : setAssets){
                         CTxIn txin = CTxIn(asset.outpoint,CScript(),
@@ -4572,7 +4572,7 @@ bool CWallet::CreateTransactionAll(const std::vector<CRecipient>& vecSend, CWall
                         txNew.vin.push_back(txin);
                         }
                 }
-                /** NEOX END */
+                /** Depths END */
 
                 // If no specific change position was requested, apply BIP69
                 if (nChangePosRequest == -1 && !(fTransferAsset || fNewAsset || fReissueAsset)) {

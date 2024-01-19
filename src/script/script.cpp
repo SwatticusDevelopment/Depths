@@ -142,7 +142,7 @@ const char* GetOpName(opcodetype opcode)
     case OP_NOP9                   : return "OP_NOP9";
     case OP_NOP10                  : return "OP_NOP10";
 
-    case OP_NEOX_ASSET              : return "OP_NEOX_ASSET";
+    case OP_Depths_ASSET              : return "OP_Depths_ASSET";
 
     case OP_INVALIDOPCODE          : return "OP_INVALIDOPCODE";
 
@@ -156,7 +156,7 @@ const char* GetOpName(opcodetype opcode)
     }
 }
 
-/** NEOX START */
+/** Depths START */
 bool CScript::IsAssetScript() const
 {
     int nType = 0;
@@ -174,33 +174,33 @@ bool CScript::IsAssetScript(int& nType, bool& isOwner) const
 bool CScript::IsAssetScript(int& nType, bool& fIsOwner, int& nStartingIndex) const
 {
     if (this->size() > 31) {
-        if ((*this)[25] == OP_NEOX_ASSET) { // OP_NEOX_ASSET is always in the 25 index of the script if it exists
+        if ((*this)[25] == OP_Depths_ASSET) { // OP_Depths_ASSET is always in the 25 index of the script if it exists
             int index = -1;
-            if ((*this)[27] == NEOX_N) { // Check to see if NEOX starts at 27 ( this->size() < 105)
-                if ((*this)[28] == NEOX_E)
-                    if ((*this)[29] == NEOX_X)
+            if ((*this)[27] == Depths_N) { // Check to see if Depths starts at 27 ( this->size() < 105)
+                if ((*this)[28] == Depths_E)
+                    if ((*this)[29] == Depths_X)
                         index = 30;
             } else {
-                if ((*this)[28] == NEOX_N) // Check to see if NEOX starts at 28 ( this->size() >= 105)
-                    if ((*this)[29] == NEOX_E)
-                        if ((*this)[30] == NEOX_X)
+                if ((*this)[28] == Depths_N) // Check to see if Depths starts at 28 ( this->size() >= 105)
+                    if ((*this)[29] == Depths_E)
+                        if ((*this)[30] == Depths_X)
                             index = 31;
             }
 
             if (index > 0) {
                 nStartingIndex = index + 1; // Set the index where the asset data begins. Use to serialize the asset data into asset objects
-                if ((*this)[index] == NEOX_T) { // Transfer first anticipating more transfers than other assets operations
+                if ((*this)[index] == Depths_T) { // Transfer first anticipating more transfers than other assets operations
                     nType = TX_TRANSFER_ASSET;
                     return true;
-                } else if ((*this)[index] == NEOX_Q && this->size() > 39) {
+                } else if ((*this)[index] == Depths_Q && this->size() > 39) {
                     nType = TX_NEW_ASSET;
                     fIsOwner = false;
                     return true;
-                } else if ((*this)[index] == NEOX_O) {
+                } else if ((*this)[index] == Depths_O) {
                     nType = TX_NEW_ASSET;
                     fIsOwner = true;
                     return true;
-                } else if ((*this)[index] == NEOX_N) {
+                } else if ((*this)[index] == Depths_N) {
                     nType = TX_REISSUE_ASSET;
                     return true;
                 }
@@ -260,15 +260,15 @@ bool CScript::IsNullAsset() const
 bool CScript::IsNullAssetTxDataScript() const
 {
     return (this->size() > 23 &&
-            (*this)[0] == OP_NEOX_ASSET &&
+            (*this)[0] == OP_Depths_ASSET &&
             (*this)[1] == 0x14);
 }
 
 bool CScript::IsNullGlobalRestrictionAssetTxDataScript() const
 {
-    // 1 OP_NEOX_ASSET followed by two OP_RESERVED + atleast 4 characters for the restricted name $ABC
+    // 1 OP_Depths_ASSET followed by two OP_RESERVED + atleast 4 characters for the restricted name $ABC
     return (this->size() > 6 &&
-            (*this)[0] == OP_NEOX_ASSET &&
+            (*this)[0] == OP_Depths_ASSET &&
             (*this)[1] == OP_RESERVED &&
             (*this)[2] == OP_RESERVED);
 }
@@ -276,9 +276,9 @@ bool CScript::IsNullGlobalRestrictionAssetTxDataScript() const
 
 bool CScript::IsNullAssetVerifierTxDataScript() const
 {
-    // 1 OP_NEOX_ASSET followed by one OP_RESERVED
+    // 1 OP_Depths_ASSET followed by one OP_RESERVED
     return (this->size() > 3 &&
-            (*this)[0] == OP_NEOX_ASSET &&
+            (*this)[0] == OP_Depths_ASSET &&
             (*this)[1] == OP_RESERVED &&
             (*this)[2] != OP_RESERVED);
 }
@@ -442,7 +442,7 @@ bool CScript::HasValidOps() const
 bool CScript::IsUnspendable() const
 {
     CAmount nAmount;
-    return (size() > 0 && *begin() == OP_RETURN) || (size() > 0 && *begin() == OP_NEOX_ASSET) || (size() > MAX_SCRIPT_SIZE) || (GetAssetAmountFromScript(*this, nAmount) && nAmount == 0);
+    return (size() > 0 && *begin() == OP_RETURN) || (size() > 0 && *begin() == OP_Depths_ASSET) || (size() > MAX_SCRIPT_SIZE) || (GetAssetAmountFromScript(*this, nAmount) && nAmount == 0);
 }
 
 //!--------------------------------------------------------------------------------------------------------------------------!//

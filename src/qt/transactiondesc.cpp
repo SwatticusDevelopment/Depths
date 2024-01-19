@@ -68,7 +68,7 @@ QString TransactionDesc::toHTML(CWallet *wallet, CWalletTx &wtx, TransactionReco
 {
     QString strHTML;
 
-    if (rec->assetName != "NEOX") {
+    if (rec->assetName != "Depths") {
         return toAssetHTML(wallet, wtx, rec, unit);
     }
 
@@ -431,7 +431,7 @@ QString TransactionDesc::toAssetHTML(CWallet *wallet, CWalletTx &wtx, Transactio
         strHTML += "<b>" + tr("Debit") + ":</b> " + BitcoinUnits::formatWithCustomName(QString::fromStdString(rec->assetName), nAssetsRec, rec->units, true) + "<br>";
     }
 
-    strHTML += "<b>" + tr("Net NEOX amount") + ":</b> " + BitcoinUnits::formatHtmlWithUnit(unit, nNet, true) + "<br>";
+    strHTML += "<b>" + tr("Net Depths amount") + ":</b> " + BitcoinUnits::formatHtmlWithUnit(unit, nNet, true) + "<br>";
 
     //
     // Message

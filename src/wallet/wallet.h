@@ -917,7 +917,7 @@ public:
      * populate vCoins with vector of available COutputs, and populates vAssetCoins in fWithAssets is set to true.
      */
     void AvailableCoinsAll(std::vector<COutput>& vCoins, std::map<std::string, std::vector<COutput> >& mapAssetCoins,
-                            bool fGetNEOX = true, bool fOnlyAssets = false,
+                            bool fGetDepths = true, bool fOnlyAssets = false,
                             bool fOnlySafe = true, const CCoinControl *coinControl = nullptr,
                             const CAmount& nMinimumAmount = 1, const CAmount& nMaximumAmount = MAX_MONEY,
                             const CAmount& nMinimumSumAmount = MAX_MONEY, const uint64_t& nMaximumCount = 0,
@@ -932,7 +932,7 @@ public:
                          const uint64_t &nMaximumCount = 0, const int &nMinDepth = 0, const int &nMaxDepth = 9999999) const;
 
     /**
-     * Helper function that calls AvailableCoinsAll, used to receive all coins, Assets and NEOX
+     * Helper function that calls AvailableCoinsAll, used to receive all coins, Assets and Depths
      */
     void AvailableCoinsWithAssets(std::vector<COutput> &vCoins, std::map<std::string, std::vector<COutput> > &mapAssetCoins,
                                   bool fOnlySafe = true, const CCoinControl *coinControl = nullptr, const CAmount &nMinimumAmount = 1,
@@ -970,7 +970,7 @@ public:
 
     bool SelectCoinsGroupedByAddresses(std::vector<CompactTallyItem>& vecTallyRet, bool fSkipDenominated = true, bool fAnonymizable = true, bool fSkipUnconfirmed = true, int nMaxOupointsPerAddress = -1) const;
 
-    /// Get collateral NEOX output and keys which can be used for the Smartnode
+    /// Get collateral Depths output and keys which can be used for the Smartnode
     bool GetSmartnodeOutpointAndKeys(COutPoint& outpointRet, CPubKey& pubKeyRet, CKey& keyRet, const std::string& strTxHash = "", const std::string& strOutputIndex = "");
     /// Extract txin information and keys from output
     bool GetOutpointAndKeysFromOutput(const COutput& out, COutPoint& outpointRet, CPubKey& pubKeyRet, CKey& keyRet);

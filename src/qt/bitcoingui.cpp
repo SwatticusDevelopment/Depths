@@ -388,7 +388,7 @@ void BitcoinGUI::createActions()
     }
 
     TransferAssetsAction = new QAction(tr("&Transfer Assets"), this);
-    TransferAssetsAction->setStatusTip(tr("Transfer assets to NEOX addresses"));
+    TransferAssetsAction->setStatusTip(tr("Transfer assets to Depths addresses"));
     TransferAssetsAction->setCheckable(true);
     tabGroup->addAction(TransferAssetsAction);
 
@@ -1405,7 +1405,7 @@ void BitcoinGUI::showIncomingTransactions()
 
         QString msg;
         if (sentCount > 0) {
-            if (txs.back().assetName == "NEOX")
+            if (txs.back().assetName == "Depths")
                 msg += tr("Sent Amount: %1\n").arg(BitcoinUnits::formatWithUnit(unit, sentAmount, true));
             else
                 msg += tr("Sent Amount: %1\n").arg(BitcoinUnits::formatWithCustomName(txs.back().assetName, sentAmount, MAX_ASSET_UNITS, true));
@@ -1413,7 +1413,7 @@ void BitcoinGUI::showIncomingTransactions()
             //msg += tr("Sent Amount: %1\n").arg(BitcoinUnits::formatWithUnit(unit, sentAmount, true));
         }
         if (receivedCount > 0) {
-            if (txs.back().assetName == "NEOX")
+            if (txs.back().assetName == "Depths")
                 msg += tr("Received Amount: %1\n").arg(BitcoinUnits::formatWithUnit(unit, receivedAmount, true));
             else
                 msg += tr("Received Amount: %1\n").arg(BitcoinUnits::formatWithCustomName(txs.back().assetName, receivedAmount, MAX_ASSET_UNITS, true));
@@ -1426,7 +1426,7 @@ void BitcoinGUI::showIncomingTransactions()
         for (auto& itx : txs) {
             // On new transaction, make an info balloon
             QString msg = tr("Date: %1\n").arg(itx.date);
-            if (itx.assetName == "NEOX")
+            if (itx.assetName == "Depths")
                 msg += tr("Amount: %1\n").arg(BitcoinUnits::formatWithUnit(itx.unit, itx.amount, true));
             else
                 msg += tr("Amount: %1\n").arg(BitcoinUnits::formatWithCustomName(itx.assetName, itx.amount, MAX_ASSET_UNITS, true));
@@ -1446,7 +1446,7 @@ void BitcoinGUI::checkAssets()
     // Check that status of RIP2 and activate the assets icon if it is active
     if(AreAssetsDeployed()) {
         TransferAssetsAction->setDisabled(false);
-        TransferAssetsAction->setToolTip(tr("Transfer assets to NEOX addresses"));
+        TransferAssetsAction->setToolTip(tr("Transfer assets to Depths addresses"));
         CreateAssetsAction->setDisabled(false);
         CreateAssetsAction->setToolTip(tr("Create new assets"));
         ManageAssetsAction->setDisabled(false);

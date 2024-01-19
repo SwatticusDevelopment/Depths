@@ -52,7 +52,7 @@ BOOST_FIXTURE_TEST_SUITE(asset_tests, BasicTestingSetup)
         BOOST_CHECK(!IsAssetNameValid("RVN", type));
         BOOST_CHECK(!IsAssetNameValid("RAVEN", type));
         BOOST_CHECK(!IsAssetNameValid("RAVENCOIN", type));
-        BOOST_CHECK(!IsAssetNameValid("NEOX", type));
+        BOOST_CHECK(!IsAssetNameValid("Depths", type));
         BOOST_CHECK(!IsAssetNameValid("Depths", type));
 
         //- Versions of Depths ALLOWED

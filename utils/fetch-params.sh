@@ -27,15 +27,15 @@ WGETCMD="$(command -v wget || echo '')"
 IPFSCMD="$(command -v ipfs || echo '')"
 CURLCMD="$(command -v curl || echo '')"
 
-# fetch methods can be disabled with NEOX_DISABLE_SOMETHING=1
-NEOX_DISABLE_WGET="${NEOX_DISABLE_WGET:-}"
-#NEOX_DISABLE_IPFS="${NEOX_DISABLE_IPFS:-}"
-NEOX_DISABLE_CURL="${NEOX_DISABLE_CURL:-}"
+# fetch methods can be disabled with Depths_DISABLE_SOMETHING=1
+Depths_DISABLE_WGET="${Depths_DISABLE_WGET:-}"
+#Depths_DISABLE_IPFS="${Depths_DISABLE_IPFS:-}"
+Depths_DISABLE_CURL="${Depths_DISABLE_CURL:-}"
 
 LOCKFILE=/tmp/fetch_params.lock
 
 fetch_wget() {
-    if [ -z "$WGETCMD" ] || ! [ -z "$NEOX_DISABLE_WGET" ]; then
+    if [ -z "$WGETCMD" ] || ! [ -z "$Depths_DISABLE_WGET" ]; then
         return 1
     fi
 
@@ -53,7 +53,7 @@ EOF
 }
 
 #fetch_ipfs() {
-#    if [ -z "$IPFSCMD" ] || ! [ -z "$NEOX_DISABLE_IPFS" ]; then
+#    if [ -z "$IPFSCMD" ] || ! [ -z "$Depths_DISABLE_IPFS" ]; then
 #        return 1
 #    fi
 
@@ -66,7 +66,7 @@ EOF
 #}
 
 fetch_curl() {
-    if [ -z "$CURLCMD" ] || ! [ -z "$NEOX_DISABLE_CURL" ]; then
+    if [ -z "$CURLCMD" ] || ! [ -z "$Depths_DISABLE_CURL" ]; then
         return 1
     fi
 
@@ -176,7 +176,7 @@ main() {
     || exit_locked_error
 
     cat <<EOF
-NEOX - fetch-params.sh
+Depths - fetch-params.sh
 
 This script will fetch the Depths SNARK parameters and verify their
 integrity with sha256sum.

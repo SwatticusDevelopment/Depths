@@ -1095,7 +1095,7 @@ void CTxMemPool::removeForBlock(const std::vector<CTransactionRef>& vtx, unsigne
             entries.push_back(&*i);
     }
 
-    /** NEOX START */
+    /** Depths START */
     // Get the newly added assets, and make sure they are in the entries
     std::vector<CTransaction> trans;
     for (auto it : connectedBlockData.newAssetsToAdd) {
@@ -1276,14 +1276,14 @@ static void CheckInputsAndUpdateCoins(const CTransaction& tx, CCoinsViewCache& m
     CAmount txfee = 0;
     CAmount specialTxFee = 0;
     bool fCheckResult = tx.IsCoinBase() || Consensus::CheckTxInputs(tx, state, mempoolDuplicate, spendheight, txfee, specialTxFee, true);
-   /** NEOX START */
+   /** Depths START */
     if (AreAssetsDeployed()) {
         std::vector<std::pair<std::string, uint256>> vReissueAssets;
         bool fCheckAssets = Consensus::CheckTxAssets(tx, state, mempoolDuplicate, passets, false, vReissueAssets, true);
         assert(fCheckResult && fCheckAssets);
     } else
         assert(fCheckResult);
-    /** NEOX END */
+    /** Depths END */
     CTxUndo txundo;
     UpdateCoins(tx, mempoolDuplicate, txundo, 1000000);
 }

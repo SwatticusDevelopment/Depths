@@ -360,7 +360,7 @@ public:
     // GetValueIn() is a method on CCoinsViewCache, because
     // inputs must be known to compute value in.
 
-    /** NEOX START */
+    /** Depths START */
     bool IsNewAsset() const;
     bool VerifyNewAsset(std::string& strError) const;
     bool IsNewUniqueAsset() const;
@@ -379,7 +379,7 @@ public:
     bool GetVerifierStringFromTx(CNullAssetTxVerifierString& verifier, std::string& strError) const;
     bool GetVerifierStringFromTx(CNullAssetTxVerifierString& verifier, std::string& strError, bool& fNotFound) const;
 
-    /** NEOX END */
+    /** Depths END */
 
     /**
      * Get the total transaction size in bytes, including witness data.

@@ -51,10 +51,10 @@ QList<TransactionRecord> TransactionRecord::decomposeTransaction(const CWallet *
             const CTxOut& txout = wtx.tx->vout[i];
             isminetype mine = wallet->IsMine(txout);
 
-            /** NEOX START */
+            /** Depths START */
             if (txout.scriptPubKey.IsAssetScript() || txout.scriptPubKey.IsNullAssetTxDataScript() || txout.scriptPubKey.IsNullGlobalRestrictionAssetTxDataScript())
                 continue;
-            /** NEOX END */
+            /** Depths END */
 
             if(mine)
             {
@@ -109,10 +109,10 @@ QList<TransactionRecord> TransactionRecord::decomposeTransaction(const CWallet *
         int nToMe = 0;
         for (const CTxOut& txout : wtx.tx->vout) {
 
-            /** NEOX START */
+            /** Depths START */
             if (txout.scriptPubKey.IsAssetScript() || txout.scriptPubKey.IsNullAssetTxDataScript() || txout.scriptPubKey.IsNullGlobalRestrictionAssetTxDataScript())
                 continue;
-            /** NEOX END */
+            /** Depths END */
             
             if(wallet->IsMine(txout)) {
                 fAllToMeDenom = fAllToMeDenom && CPrivateSend::IsDenominatedAmount(txout.nValue);
@@ -209,10 +209,10 @@ QList<TransactionRecord> TransactionRecord::decomposeTransaction(const CWallet *
             {
                 const CTxOut& txout = wtx.tx->vout[nOut];
 
-                /** NEOX START */
+                /** Depths START */
                 if (txout.scriptPubKey.IsAssetScript())
                     continue;
-                /** NEOX END */
+                /** Depths END */
 
                 TransactionRecord sub(hash, nTime);
                 sub.idx = nOut;
@@ -289,7 +289,7 @@ QList<TransactionRecord> TransactionRecord::decomposeTransaction(const CWallet *
         }
     }
 
-     /** NEOX START */
+     /** Depths START */
     if (AreAssetsDeployed()) {
         CAmount nFee;
         std::string strSentAccount;
@@ -390,7 +390,7 @@ QList<TransactionRecord> TransactionRecord::decomposeTransaction(const CWallet *
             }
         }
     }
-    /** NEOX END */
+    /** Depths END */
 
     return parts;
 }

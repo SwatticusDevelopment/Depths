@@ -652,7 +652,7 @@ QVariant TransactionTableModel::data(const QModelIndex &index, int role) const
         case Amount:
             return formatTxAmount(rec, true, BitcoinUnits::separatorAlways);
         case AssetName:
-            if (rec->assetName != "NEOX")
+            if (rec->assetName != "Depths")
                return QString::fromStdString(rec->assetName);
             else
                return QString(BitcoinUnits::name(walletModel->getOptionsModel()->getDisplayUnit()));
@@ -772,7 +772,7 @@ QVariant TransactionTableModel::data(const QModelIndex &index, int role) const
     case AssetNameRole:
         {
             QString assetName;
-            if (rec->assetName != "NEOX")
+            if (rec->assetName != "Depths")
                assetName.append(QString::fromStdString(rec->assetName));
             else
                assetName.append(QString(BitcoinUnits::name(walletModel->getOptionsModel()->getDisplayUnit())));
@@ -814,7 +814,7 @@ QVariant TransactionTableModel::headerData(int section, Qt::Orientation orientat
             case Amount:
                 return tr("Amount removed from or added to balance.");
             case AssetName:
-                return tr("The asset (or NEOX) removed or added to balance.");
+                return tr("The asset (or Depths) removed or added to balance.");
             }
         }
     }

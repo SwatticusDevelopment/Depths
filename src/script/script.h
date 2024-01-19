@@ -182,7 +182,7 @@ enum opcodetype
     OP_NOP9 = 0xb8,
     OP_NOP10 = 0xb9,
 
-    OP_NEOX_ASSET = 0xc0,
+    OP_Depths_ASSET = 0xc0,
 
     // template matching params
     OP_SMALLINTEGER = 0xfa,
@@ -565,7 +565,7 @@ public:
 
         // If we see an op Depths asset, we consider all data after it has data, and not op codes
         // Move the pc to the end of the script
-        if (opcode == OP_NEOX_ASSET) {
+        if (opcode == OP_Depths_ASSET) {
             unsigned int nSize = end() - pc;
             if (pvchRet)
                 pvchRet->assign(pc, pc + nSize);
@@ -650,7 +650,7 @@ public:
     bool IsPayToWitnessScriptHash() const;
     bool IsWitnessProgram(int& version, std::vector<unsigned char>& program) const;
 
-    /* NEOX ASSETS START */
+    /* Depths ASSETS START */
     enum class txnouttype;
     bool IsAssetScript(int& nType, bool& fIsOwner, int& nStartingIndex) const;
     bool IsAssetScript(int& nType, bool& fIsOwner) const;
@@ -664,7 +664,7 @@ public:
     bool IsNullAssetTxDataScript() const;
     bool IsNullAssetVerifierTxDataScript() const;
     bool IsNullGlobalRestrictionAssetTxDataScript() const;
-    /* NEOX ASSETS END */
+    /* Depths ASSETS END */
 
     /** Used for obsolete pay-to-pubkey addresses indexing. */
     bool IsPayToPublicKey() const;

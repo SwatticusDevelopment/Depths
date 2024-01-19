@@ -20,9 +20,9 @@ BitcoinUnits::BitcoinUnits(QObject *parent):
 QList<BitcoinUnits::Unit> BitcoinUnits::availableUnits()
 {
     QList<BitcoinUnits::Unit> unitlist;
-    unitlist.append(NEOX);
-    unitlist.append(mNEOX);
-    unitlist.append(uNEOX);
+    unitlist.append(Depths);
+    unitlist.append(mDepths);
+    unitlist.append(uDepths);
     return unitlist;
 }
 
@@ -30,9 +30,9 @@ bool BitcoinUnits::valid(int unit)
 {
     switch(unit)
     {
-    case NEOX:
-    case mNEOX:
-    case uNEOX:
+    case Depths:
+    case mDepths:
+    case uDepths:
         return true;
     default:
         return false;
@@ -45,9 +45,9 @@ QString BitcoinUnits::name(int unit)
     {
         switch(unit)
         {
-            case NEOX: return QString("NEOX");
-            case mNEOX: return QString("mNEOX");
-            case uNEOX: return QString::fromUtf8("μNEOX");
+            case Depths: return QString("Depths");
+            case mDepths: return QString("mDepths");
+            case uDepths: return QString::fromUtf8("μDepths");
             default: return QString("???");
         }
     }
@@ -55,9 +55,9 @@ QString BitcoinUnits::name(int unit)
     {
         switch(unit)
         {
-            case NEOX: return QString("tNEOX");
-            case mNEOX: return QString("mtNEOX");
-            case uNEOX: return QString::fromUtf8("μtNEOX");
+            case Depths: return QString("tDepths");
+            case mDepths: return QString("mtDepths");
+            case uDepths: return QString::fromUtf8("μtDepths");
             default: return QString("???");
         }
     }
@@ -69,9 +69,9 @@ QString BitcoinUnits::description(int unit)
     {
         switch(unit)
         {
-            case NEOX: return QString("Depths");
-            case mNEOX: return QString("Milli-Depths (1 / 1" THIN_SP_UTF8 "000)");
-            case uNEOX: return QString("Micro-Depths (1 / 1" THIN_SP_UTF8 "000" THIN_SP_UTF8 "000)");
+            case Depths: return QString("Depths");
+            case mDepths: return QString("Milli-Depths (1 / 1" THIN_SP_UTF8 "000)");
+            case uDepths: return QString("Micro-Depths (1 / 1" THIN_SP_UTF8 "000" THIN_SP_UTF8 "000)");
             default: return QString("???");
         }
     }
@@ -79,9 +79,9 @@ QString BitcoinUnits::description(int unit)
     {
         switch(unit)
         {
-            case NEOX: return QString("TestDepths");
-            case mNEOX: return QString("Milli-TestDepths (1 / 1" THIN_SP_UTF8 "000)");
-            case uNEOX: return QString("Micro-TestDepths (1 / 1" THIN_SP_UTF8 "000" THIN_SP_UTF8 "000)");
+            case Depths: return QString("TestDepths");
+            case mDepths: return QString("Milli-TestDepths (1 / 1" THIN_SP_UTF8 "000)");
+            case uDepths: return QString("Micro-TestDepths (1 / 1" THIN_SP_UTF8 "000" THIN_SP_UTF8 "000)");
             default: return QString("???");
         }
     }
@@ -91,9 +91,9 @@ qint64 BitcoinUnits::factor(int unit)
 {
     switch(unit)
     {
-        case NEOX:  return 100000000;
-        case mNEOX: return 100000;
-        case uNEOX: return 100;
+        case Depths:  return 100000000;
+        case mDepths: return 100000;
+        case uDepths: return 100;
         default:   return 100000000;
     }
 }
@@ -119,9 +119,9 @@ int BitcoinUnits::decimals(int unit)
 {
     switch(unit)
     {
-        case NEOX: return 8;
-        case mNEOX: return 5;
-        case uNEOX: return 2;
+        case Depths: return 8;
+        case mDepths: return 5;
+        case uDepths: return 2;
         default: return 0;
     }
 }
@@ -176,7 +176,7 @@ QString BitcoinUnits::formatWithUnit(int unit, const CAmount& amount, bool pluss
 
 QString BitcoinUnits::formatWithCustomName(QString customName, const CAmount& amount, int unit, bool plussign, SeparatorStyle separators)
 {
-    return format(NEOX, amount / factorAsset(MAX_ASSET_UNITS - unit), plussign, separators, unit) + QString(" ") + customName;
+    return format(Depths, amount / factorAsset(MAX_ASSET_UNITS - unit), plussign, separators, unit) + QString(" ") + customName;
 }
 
 QString BitcoinUnits::formatHtmlWithUnit(int unit, const CAmount& amount, bool plussign, SeparatorStyle separators)

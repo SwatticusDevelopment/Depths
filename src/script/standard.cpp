@@ -33,11 +33,11 @@ const char* GetTxnOutputType(txnouttype t)
     case TX_WITNESS_V0_KEYHASH: return "witness_v0_keyhash";
     case TX_WITNESS_V0_SCRIPTHASH: return "witness_v0_scripthash";
 
-    /** NEOX ASSETS START */
+    /** Depths ASSETS START */
     case TX_NEW_ASSET: return ASSET_NEW_STRING;
     case TX_TRANSFER_ASSET: return ASSET_TRANSFER_STRING;
     case TX_REISSUE_ASSET: return ASSET_REISSUE_STRING;
-    /** NEOX ASSETS END */
+    /** Depths ASSETS END */
     }
     return nullptr;
 }
@@ -73,7 +73,7 @@ bool Solver(const CScript& scriptPubKey, txnouttype& typeRet, std::vector<std::v
         return true;
     }
 
-    /** NEOX START */
+    /** Depths START */
     int nType = 0;
     bool fIsOwner = false;
     if (scriptPubKey.IsAssetScript(nType, fIsOwner)) {
@@ -82,7 +82,7 @@ bool Solver(const CScript& scriptPubKey, txnouttype& typeRet, std::vector<std::v
         vSolutionsRet.push_back(hashBytes);
         return true;
     }
-    /** NEOX END */
+    /** Depths END */
 
     int witnessversion;
     std::vector<unsigned char> witnessprogram;
@@ -114,7 +114,7 @@ bool Solver(const CScript& scriptPubKey, txnouttype& typeRet, std::vector<std::v
     //
     // So long as script passes the IsUnspendable() test and all but the first three
     // byte passes the IsPushOnly()
-    if (scriptPubKey.size() >= 1 && scriptPubKey[0] == OP_NEOX_ASSET && scriptPubKey.IsPushOnly(scriptPubKey.begin()+1)) {
+    if (scriptPubKey.size() >= 1 && scriptPubKey[0] == OP_Depths_ASSET && scriptPubKey.IsPushOnly(scriptPubKey.begin()+1)) {
         typeRet = TX_RESTRICTED_ASSET_DATA;
 
         if (scriptPubKey.size() >= 23 && scriptPubKey[1] != OP_RESERVED) {
@@ -233,7 +233,7 @@ bool ExtractDestination(const CScript& scriptPubKey, CTxDestination& addressRet)
     {
         addressRet = CScriptID(uint160(vSolutions[0]));
         return true;
-    /** NEOX ASSETS START */
+    /** Depths ASSETS START */
     } else if (whichType == TX_NEW_ASSET || whichType == TX_REISSUE_ASSET || whichType == TX_TRANSFER_ASSET) {
         addressRet = CKeyID(uint160(vSolutions[0]));
         return true;
@@ -243,7 +243,7 @@ bool ExtractDestination(const CScript& scriptPubKey, CTxDestination& addressRet)
             return true;
         }
     } 
-    /** NEOX ASSETS END */
+    /** Depths ASSETS END */
     // Multisig txns have more than one address...
     return false;
 }
@@ -356,13 +356,13 @@ namespace
 
         bool operator()(const CKeyID &keyID) const {
             script->clear();
-            *script << OP_NEOX_ASSET << ToByteVector(keyID);
+            *script << OP_Depths_ASSET << ToByteVector(keyID);
             return true;
         }
 
         bool operator()(const CScriptID &scriptID) const {
             script->clear();
-            *script << OP_NEOX_ASSET << ToByteVector(scriptID);
+            *script << OP_Depths_ASSET << ToByteVector(scriptID);
             return true;
         }
     };

@@ -106,10 +106,10 @@ private Q_SLOTS:
     void updateMinFeeLabel();
     void updateSmartFeeLabel();
 
-    /** NEOX START */
+    /** Depths START */
     void assetControlUpdateSendCoinsDialog();
     void focusAsset(const QModelIndex& index);
-    /** NEOX END */
+    /** Depths END */
 
     Q_SIGNALS:
             // Fired when a message should be reported to the user
